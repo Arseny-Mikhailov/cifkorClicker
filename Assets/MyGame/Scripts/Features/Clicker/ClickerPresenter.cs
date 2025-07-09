@@ -44,7 +44,7 @@ namespace MyGame.Scripts
         {
             while (!token.IsCancellationRequested)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(_model.Config.autoClickInterval), cancellationToken: token);
+                await UniTask.Delay(TimeSpan.FromSeconds(_model.Config.AutoClickInterval), cancellationToken: token);
 
                 if (_model.TryClick())
                 {
@@ -58,7 +58,7 @@ namespace MyGame.Scripts
         {
             while (!token.IsCancellationRequested)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(_model.Config.energyRestoreInterval), cancellationToken: token);
+                await UniTask.Delay(TimeSpan.FromSeconds(_model.Config.EnergyRestoreInterval), cancellationToken: token);
                 _model.RestoreEnergy();
                 UpdateUI();
             }

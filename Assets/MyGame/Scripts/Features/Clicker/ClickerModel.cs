@@ -12,7 +12,7 @@ namespace MyGame.Scripts
         public ClickerModel(ClickerConfig config)
         {
             Config = config;
-            Energy = config.maxEnergy;
+            Energy = config.MaxEnergy;
         }
 
         public bool TryClick()
@@ -25,7 +25,7 @@ namespace MyGame.Scripts
 
         public void RestoreEnergy()
         {
-            Energy = Mathf.Min(Energy + Config.energyPerTick, Config.maxEnergy);
+            Energy = Mathf.Min(Energy + Config.EnergyPerTick, Config.MaxEnergy);
         }
     }
 }
