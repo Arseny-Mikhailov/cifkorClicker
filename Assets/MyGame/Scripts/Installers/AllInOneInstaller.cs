@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MyGame.Scripts.Features.Weather;
 using MyGame.Scripts.UI;
 using UnityEngine;
 using Zenject;
@@ -33,6 +34,9 @@ namespace MyGame.Scripts.Installers
             Container.Bind<ClickerModel>().AsSingle();
             Container.BindInstance(clickerView);
             Container.Bind<ClickerPresenter>().AsSingle();
+            
+            Container.Bind<IWeatherView>().To<WeatherView>().FromComponentInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<WeatherPresenter>().AsSingle();
             
             Container.BindInstance(breedsView);
             Container.Bind<BreedsPresenter>().AsSingle();

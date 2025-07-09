@@ -1,19 +1,22 @@
+using MyGame.Scripts.UI;
 using UnityEngine;
 
-namespace MyGame.Scripts
+namespace MyGame.Scripts.Features.Weather
 {
     public class WeatherTab : MonoBehaviour, ITab
     {
         public TabType TabType => TabType.Weather;
 
+        [SerializeField] private WeatherView view;
+
         public void OnShow()
         {
-            gameObject.SetActive(true);
+            view.Show();
         }
 
         public void OnHide()
         {
-            gameObject.SetActive(false);
+            view.Hide();
         }
     }
 }
