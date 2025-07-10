@@ -45,10 +45,7 @@ namespace MyGame.Scripts
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(_model.Config.AutoClickInterval), cancellationToken: token);
 
-                if (!_model.TryClick()) continue;
-
-                _view.PlayClickVFX();
-                UpdateUI();
+                HandleClick();
             }
         }
 

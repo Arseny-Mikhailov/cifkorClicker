@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Zenject;
 
-namespace MyGame.Scripts.Features
+namespace MyGame.Scripts.Features.Breeds
 {
     public class BreedsPresenter
     {
@@ -27,6 +27,7 @@ namespace MyGame.Scripts.Features
         public void Start()
         {
             _cts?.Cancel();
+            _cts?.Dispose();
             _cts = new CancellationTokenSource();
             LoadListAsync(_cts.Token).Forget();
         }
@@ -55,6 +56,7 @@ namespace MyGame.Scripts.Features
             }
             catch (OperationCanceledException)
             {
+                Debug.Log("Loading was cancelled");
             }
             finally
             {
@@ -67,12 +69,7 @@ namespace MyGame.Scripts.Features
             using var req = UnityWebRequest.Get("https://api.thedogapi.com/v1/breeds");
             var op = req.SendWebRequest();
             await op.ToUniTask(cancellationToken: token);
-
-            if (req.result != UnityWebRequest.Result.Success)
-            { 
-                throw new Exception(req.error);
-            }
-
+            
             _breeds = JsonHelper.FromJson<BreedData>(req.downloadHandler.text);
         }
 
@@ -89,6 +86,7 @@ namespace MyGame.Scripts.Features
             }
             catch (OperationCanceledException)
             {
+                Debug.Log("Loading was cancelled");
             }
             finally
             {
@@ -101,12 +99,7 @@ namespace MyGame.Scripts.Features
             using var req = UnityWebRequest.Get($"https://api.thedogapi.com/v1/breeds/{id}");
             var op = req.SendWebRequest();
             await op.ToUniTask(cancellationToken: token);
-
-            if (req.result != UnityWebRequest.Result.Success)
-            { 
-                throw new Exception(req.error);
-            }
-
+            
             _detail = JsonUtility.FromJson<BreedData>(req.downloadHandler.text);
         }
     }

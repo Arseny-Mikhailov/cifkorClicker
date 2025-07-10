@@ -1,5 +1,6 @@
 using MyGame.Scripts.Core;
 using MyGame.Scripts.Features;
+using MyGame.Scripts.Features.Breeds;
 using UnityEngine;
 using Zenject;
 

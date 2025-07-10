@@ -31,6 +31,7 @@ namespace MyGame.Scripts.Features.Weather
             _view.Showed -= OnShow;
             _view.Hidden -= OnHide;
             _cts?.Cancel();
+            _cts?.Dispose();
         }
 
         public void Initialize()
@@ -43,7 +44,7 @@ namespace MyGame.Scripts.Features.Weather
         {
             _cts?.Cancel();
             _cts = new CancellationTokenSource();
-            LoopAsync(_cts.Token).Forget();
+            UpdateWeatherAsync(_cts.Token).Forget();
         }
 
         private void OnHide()
@@ -51,21 +52,14 @@ namespace MyGame.Scripts.Features.Weather
             _cts?.Cancel();
         }
 
-        private async UniTaskVoid LoopAsync(CancellationToken token)
+        private async UniTaskVoid UpdateWeatherAsync(CancellationToken token)
         {
             while (!token.IsCancellationRequested)
             {
                 try
                 {
                     await _queue.Enqueue(() => FetchAndDisplayAsync(token));
-                }
-                catch (OperationCanceledException)
-                {
-                    break;
-                }
 
-                try
-                {
                     await UniTask.Delay(TimeSpan.FromSeconds(IntervalSec), cancellationToken: token);
                 }
                 catch (OperationCanceledException)

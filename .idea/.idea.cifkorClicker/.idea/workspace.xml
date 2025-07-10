@@ -6,26 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="17d92ea6-cbfc-497d-a405-34f242bb4bf5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.cifkorClicker/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.cifkorClicker/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/ITab.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/ITab.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/JsonHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/JsonHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/RequestQueue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/RequestQueue.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/TabController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/TabController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/TabType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/TabType.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsPresenter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsTab.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsTab.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerPresenter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerTab.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerTab.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/IWeatherView.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/IWeatherView.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherPresenter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherTab.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherTab.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/AllInOneInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/GameInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/AllInOneInstaller.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/GameInstaller.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/UI/BottomNavigationPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/UI/BottomNavigationPanel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/GameInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/GameInstaller.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,16 +20,41 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Arseny-Mikhailov"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Arseny-Mikhailov/cifkorClicker.git",
+    "accountId": "b60e63d8-382e-4806-93ba-8f499afc6bef"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8a522b806eac9bb894e6e4c5fe87f353457535e769447e79c6b396beecb5d0/System.Threading.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.svermeulen.extenject@31f06cf810/Source/Internal/Log.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.svermeulen.extenject@31f06cf810/Source/Main/DiContainer.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2zfmUf80NccSOb1x6zWvDq3Ahjn" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager" selected="Standalone Player.Start Unity">
@@ -91,9 +101,26 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="17d92ea6-cbfc-497d-a405-34f242bb4bf5" name="Changes" comment="" />
+      <created>1752130524215</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1752130524215</updated>
+      <workItem from="1752130529874" duration="1318000" />
+    </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
 </project>
