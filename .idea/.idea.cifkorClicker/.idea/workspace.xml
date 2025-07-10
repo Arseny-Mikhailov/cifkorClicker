@@ -6,16 +6,26 @@
   <component name="ChangeListManager">
     <list default="true" id="17d92ea6-cbfc-497d-a405-34f242bb4bf5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.cifkorClicker/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.cifkorClicker/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/AppEntryPoint.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/AppEntryPoint.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/ITab.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/ITab.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/JsonHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/JsonHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/RequestQueue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/RequestQueue.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/TabController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/TabController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/TabType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Core/TabType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsPresenter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsTab.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsTab.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Breeds/BreedsView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerPresenter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/IWeatherView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/IWeatherView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerTab.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerTab.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Clicker/ClickerView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/IWeatherView.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/IWeatherView.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherPresenter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherTab.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherTab.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Features/Weather/WeatherView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/AllInOneInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/AllInOneInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/UI/CloseButton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/UI/CloseButton.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/AllInOneInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/GameInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/AllInOneInstaller.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/Installers/GameInstaller.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MyGame/Scripts/UI/BottomNavigationPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MyGame/Scripts/UI/BottomNavigationPanel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

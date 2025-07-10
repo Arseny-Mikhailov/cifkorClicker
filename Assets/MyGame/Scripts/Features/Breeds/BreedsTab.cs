@@ -1,3 +1,5 @@
+using MyGame.Scripts.Core;
+using MyGame.Scripts.Features;
 using UnityEngine;
 using Zenject;
 
@@ -5,9 +7,8 @@ namespace MyGame.Scripts
 {
     public class BreedsTab : MonoBehaviour, ITab
     {
-        public TabType TabType => TabType.Breeds;
-
         [Inject] private BreedsPresenter _presenter;
+        public TabType TabType => TabType.Breeds;
 
         public void OnShow()
         {

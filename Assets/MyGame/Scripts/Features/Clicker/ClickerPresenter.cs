@@ -34,7 +34,7 @@ namespace MyGame.Scripts
         private void HandleClick()
         {
             if (!_model.TryClick()) return;
-            
+
             _view.PlayClickVFX();
             UpdateUI();
         }
@@ -45,11 +45,10 @@ namespace MyGame.Scripts
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(_model.Config.AutoClickInterval), cancellationToken: token);
 
-                if (_model.TryClick())
-                {
-                    _view.PlayClickVFX();
-                    UpdateUI();
-                }
+                if (!_model.TryClick()) continue;
+
+                _view.PlayClickVFX();
+                UpdateUI();
             }
         }
 
@@ -57,7 +56,8 @@ namespace MyGame.Scripts
         {
             while (!token.IsCancellationRequested)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(_model.Config.EnergyRestoreInterval), cancellationToken: token);
+                await UniTask.Delay(TimeSpan.FromSeconds(_model.Config.EnergyRestoreInterval),
+                    cancellationToken: token);
                 _model.RestoreEnergy();
                 UpdateUI();
             }

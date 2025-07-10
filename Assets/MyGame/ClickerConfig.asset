@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b637ffbd1b64a2bb21ea821c69e9866, type: 3}
   m_Name: ClickerConfig
   m_EditorClassIdentifier: 
-  MaxEnergy: 1000
-  EnergyPerTick: 10
-  EnergyRestoreInterval: 10
-  AutoClickInterval: 3
+  <MaxEnergy>k__BackingField: 1000
+  <EnergyPerTick>k__BackingField: 10
+  <EnergyRestoreInterval>k__BackingField: 10
+  <AutoClickInterval>k__BackingField: 3

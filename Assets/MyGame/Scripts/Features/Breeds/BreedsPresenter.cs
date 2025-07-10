@@ -2,158 +2,112 @@ using System;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using MyGame.Scripts.Core;
 using UnityEngine;
 using UnityEngine.Networking;
 using Zenject;
 
-namespace MyGame.Scripts
+namespace MyGame.Scripts.Features
 {
-  public class BreedsPresenter
-  {
-    private readonly BreedsView _view;
-    private readonly RequestQueue _queue;
-    private CancellationTokenSource _cts;
-    private CancellationTokenSource _detailCts;
-    private BreedData[] _breedsList;
-    private BreedData _detailData;
-
-    [Inject]
-    public BreedsPresenter(BreedsView view, RequestQueue queue)
+    public class BreedsPresenter
     {
-      _view = view;
-      _queue = queue;
-    }
+        private readonly RequestQueue _queue;
+        private readonly BreedsView _view;
+        private BreedData[] _breeds;
+        private CancellationTokenSource _cts;
+        private BreedData _detail;
 
-    public void Start()
-    {
-      _cts = new CancellationTokenSource();
-      LoadBreedsList().Forget();
-    }
-
-    public void Stop()
-    {
-      _cts.Cancel();
-      _detailCts?.Cancel();
-      _view.ShowLoading(false);
-      _view.HidePopup();
-    }
-
-    private async UniTaskVoid LoadBreedsList()
-    {
-      _view.ClearList();
-      _view.ShowLoading(true);
-
-      try
-      {
-        await _queue.Enqueue(() => FetchBreeds(_cts.Token));
-        if (_cts.Token.IsCancellationRequested) return;
-
-        _view.ShowLoading(false);
-        
-        for (var i = 0; i < _breedsList.Length; i++)
+        [Inject]
+        public BreedsPresenter(BreedsView view, RequestQueue queue)
         {
-          var b = _breedsList[i];
-          _view.AddBreedItem(i, b.name, () =>
-          {
-            OnBreedSelected(b.id, b.name);
-          });
+            _view = view;
+            _queue = queue;
         }
-      }
-      catch (OperationCanceledException)
-      {
-      }
-      finally
-      {
-        _view.ShowLoading(false);
-      }
-    }
-
-    private async UniTask FetchBreeds(CancellationToken ct)
-    {
-      ct.ThrowIfCancellationRequested();
-      
-      var uwr = UnityWebRequest.Get("https://api.thedogapi.com/v1/breeds");
-      
-      var cancelRegistration = ct.Register(() => uwr.Abort());
-
-      try
-      {
-        var op = uwr.SendWebRequest();   
-        if (op == null)
-          throw new Exception("Не удалось запустить SendWebRequest()");
         
-        await op.ToUniTask(cancellationToken: ct);
-        
-        if (uwr.result != UnityWebRequest.Result.Success)
-          throw new Exception($"Ошибка запроса: {uwr.error}");
-        
-        var all = JsonHelper.FromJson<BreedData>(uwr.downloadHandler.text);
-        _breedsList = all.Take(10).ToArray();
-      }
-      finally
-      {
-        await cancelRegistration.DisposeAsync();
-        uwr.Dispose();
-      }
+        public void Start()
+        {
+            _cts?.Cancel();
+            _cts = new CancellationTokenSource();
+            LoadListAsync(_cts.Token).Forget();
+        }
+
+        public void Stop()
+        {
+            _cts?.Cancel();
+            _view.ShowLoading(false);
+            _view.HidePopup();
+        }
+
+        private async UniTaskVoid LoadListAsync(CancellationToken token)
+        {
+            _view.ClearList();
+            _view.ShowLoading(true);
+
+            try
+            {
+                await _queue.Enqueue(() => FetchBreedsAsync(token));
+
+                foreach (var b in _breeds.Take(10))
+                { 
+                    _view.AddBreedItem(b.id, b.name, 
+                        () => ShowDetailAsync(b.id, token).Forget());
+                }
+            }
+            catch (OperationCanceledException)
+            {
+            }
+            finally
+            {
+                _view.ShowLoading(false);
+            }
+        }
+
+        private async UniTask FetchBreedsAsync(CancellationToken token)
+        {
+            using var req = UnityWebRequest.Get("https://api.thedogapi.com/v1/breeds");
+            var op = req.SendWebRequest();
+            await op.ToUniTask(cancellationToken: token);
+
+            if (req.result != UnityWebRequest.Result.Success)
+            { 
+                throw new Exception(req.error);
+            }
+
+            _breeds = JsonHelper.FromJson<BreedData>(req.downloadHandler.text);
+        }
+
+        private async UniTaskVoid ShowDetailAsync(int id, CancellationToken token)
+        {
+            _view.ShowLoading(true);
+            _view.HidePopup();
+
+            try
+            {
+                await _queue.Enqueue(() => FetchDetailAsync(id, token));
+
+                _view.ShowPopup(_detail.name, _detail.temperament);
+            }
+            catch (OperationCanceledException)
+            {
+            }
+            finally
+            {
+                _view.ShowLoading(false);
+            }
+        }
+
+        private async UniTask FetchDetailAsync(int id, CancellationToken token)
+        {
+            using var req = UnityWebRequest.Get($"https://api.thedogapi.com/v1/breeds/{id}");
+            var op = req.SendWebRequest();
+            await op.ToUniTask(cancellationToken: token);
+
+            if (req.result != UnityWebRequest.Result.Success)
+            { 
+                throw new Exception(req.error);
+            }
+
+            _detail = JsonUtility.FromJson<BreedData>(req.downloadHandler.text);
+        }
     }
-
-    private void OnBreedSelected(int id, string name)
-    {
-      _detailCts?.Cancel();
-      _detailCts = CancellationTokenSource
-        .CreateLinkedTokenSource(_cts.Token);
-
-      ShowBreedDetail(id, name, _detailCts.Token).Forget();
-    }
-
-    private async UniTaskVoid ShowBreedDetail(
-      int id, string name, CancellationToken ct)
-    {
-      _view.ShowLoading(true);
-      _view.HidePopup();
-
-      try
-      {
-        await _queue.Enqueue(() => FetchBreedDetail(id, ct));
-        if (ct.IsCancellationRequested) return;
-        
-        _view.ShowPopup(
-          _detailData.name,
-          _detailData.temperament
-        );
-      }
-      catch (OperationCanceledException)
-      {
-      }
-      finally
-      {
-        _view.ShowLoading(false);
-      }
-    }
-
-    private async UniTask FetchBreedDetail(int id, CancellationToken ct)
-    {
-      ct.ThrowIfCancellationRequested();
-      var uwr = UnityWebRequest.Get($"https://api.thedogapi.com/v1/breeds/{id}");
-      var cancelRegistration = ct.Register(() => uwr.Abort());
-      try
-      {
-        var op = uwr.SendWebRequest();
-        if (op == null)
-          throw new Exception("Не удалось запустить SendWebRequest()");
-
-        await op.ToUniTask(cancellationToken: ct);
-
-        if (uwr.result != UnityWebRequest.Result.Success)
-          throw new Exception($"Ошибка: {uwr.error}");
-
-        _detailData = JsonUtility.FromJson<BreedData>(uwr.downloadHandler.text);
-      }
-      finally
-      {
-        await cancelRegistration.DisposeAsync();
-        uwr.Dispose();
-      }
-    }
-  }
 }

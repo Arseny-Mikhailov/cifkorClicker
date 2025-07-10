@@ -1,5 +1,4 @@
 using System;
-using MyGame.Scripts.Features.Weather;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,11 +7,10 @@ namespace MyGame.Scripts.UI
 {
     public class WeatherView : MonoBehaviour
     {
+        [SerializeField] private Image weatherIcon;
+        [SerializeField] private TextMeshProUGUI weatherText;
         public event Action Showed;
         public event Action Hidden;
-
-        [SerializeField] private Image _weatherIcon;
-        [SerializeField] private TextMeshProUGUI _weatherText;
 
         public void Show()
         {
@@ -28,8 +26,8 @@ namespace MyGame.Scripts.UI
 
         public void SetWeather(string label, Sprite icon)
         {
-            _weatherText.text = label;
-            _weatherIcon.sprite = icon;
+            weatherText.text = label;
+            weatherIcon.sprite = icon;
         }
     }
 }

@@ -27,7 +27,10 @@ namespace MyGame.Scripts
                 Destroy(child.gameObject);
         }
 
-        public void ShowLoading(bool show) => loadingIndicator.SetActive(show);
+        public void ShowLoading(bool show)
+        {
+            loadingIndicator.SetActive(show);
+        }
 
         public void ShowPopup(string textName, string description)
         {
@@ -36,7 +39,10 @@ namespace MyGame.Scripts
             popupDescription.text = description;
         }
 
-        public void HidePopup() => popup.SetActive(false);
+        public void HidePopup()
+        {
+            popup.SetActive(false);
+        }
 
         public void AddBreedItem(int index, string textName, Action onClick)
         {

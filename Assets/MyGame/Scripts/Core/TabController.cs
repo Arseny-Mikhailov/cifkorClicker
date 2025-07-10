@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MyGame.Scripts
+namespace MyGame.Scripts.Core
 {
     public class TabController
     {

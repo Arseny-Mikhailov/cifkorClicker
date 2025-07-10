@@ -18,12 +18,12 @@ namespace MyGame.Scripts
 
         public AudioSource clickSound;
 
-        public event Action OnClick;
-
         private void Start()
         {
             clickButton.onClick.AddListener(() => OnClick?.Invoke());
         }
+
+        public event Action OnClick;
 
         public void SetCurrency(int value)
         {
@@ -47,6 +47,3 @@ namespace MyGame.Scripts
         }
     }
 }
-
-
-

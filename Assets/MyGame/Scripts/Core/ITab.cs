@@ -1,4 +1,4 @@
-namespace MyGame.Scripts
+namespace MyGame.Scripts.Core
 {
     public interface ITab
     {

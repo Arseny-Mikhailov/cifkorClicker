@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using MyGame.Scripts.Core;
+using MyGame.Scripts.Features;
 using MyGame.Scripts.Features.Weather;
 using MyGame.Scripts.UI;
 using UnityEngine;
@@ -6,7 +8,7 @@ using Zenject;
 
 namespace MyGame.Scripts.Installers
 {
-    public class AllInOneInstaller : MonoInstaller
+    public class GameInstaller : MonoInstaller
     {
         [SerializeField] private ClickerTab clickerTab;
         [SerializeField] private WeatherTab weatherTab;
@@ -15,6 +17,12 @@ namespace MyGame.Scripts.Installers
         [SerializeField] private ClickerConfig config;
         [SerializeField] private ClickerView clickerView;
         [SerializeField] private BreedsView breedsView;
+
+        public override void Start()
+        {
+            var tabController = Container.Resolve<TabController>();
+            tabController.SwitchTo(TabType.Clicker);
+        }
 
         public override void InstallBindings()
         {
@@ -39,12 +47,6 @@ namespace MyGame.Scripts.Installers
             Container.Bind<BreedsPresenter>().AsSingle();
 
             Container.Bind<RequestQueue>().FromInstance(RequestQueue.Instance).AsSingle();
-        }
-        
-        public override void Start()
-        {
-            var tabController = Container.Resolve<TabController>();
-            tabController.SwitchTo(TabType.Clicker);
         }
     }
 }

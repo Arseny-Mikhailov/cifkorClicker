@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using MyGame.Scripts.Core;
 using MyGame.Scripts.UI;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -10,19 +11,26 @@ namespace MyGame.Scripts.Features.Weather
 {
     public class WeatherPresenter : IInitializable, IDisposable
     {
-        private readonly WeatherView _view;
-        private readonly RequestQueue _queue;
-
-        private CancellationTokenSource _loopCts;
-        private CancellationTokenSource _requestCts;
-
         private const string ApiUrl = "https://api.weather.gov/gridpoints/TOP/32,81/forecast";
+
         private const float IntervalSec = 5f;
 
+        private readonly RequestQueue _queue;
+        private readonly WeatherView _view;
+        private CancellationTokenSource _cts;
+
+        [Inject]
         public WeatherPresenter(WeatherView view, RequestQueue queue)
         {
             _view = view;
             _queue = queue;
+        }
+
+        public void Dispose()
+        {
+            _view.Showed -= OnShow;
+            _view.Hidden -= OnHide;
+            _cts?.Cancel();
         }
 
         public void Initialize()
@@ -31,101 +39,87 @@ namespace MyGame.Scripts.Features.Weather
             _view.Hidden += OnHide;
         }
 
-        public void Dispose()
+        private void OnShow()
         {
-            _view.Showed -= OnShow;
-            _view.Hidden -= OnHide;
-            CancelAll();
+            _cts?.Cancel();
+            _cts = new CancellationTokenSource();
+            LoopAsync(_cts.Token).Forget();
         }
 
-        private void OnShow() => StartLoop().Forget();
-
-        private void OnHide() => CancelAll();
-
-        private void CancelAll()
+        private void OnHide()
         {
-            _loopCts?.Cancel();
-            _requestCts?.Cancel();
+            _cts?.Cancel();
         }
 
-        private async UniTaskVoid StartLoop()
+        private async UniTaskVoid LoopAsync(CancellationToken token)
         {
-            CancelAll();
-            _loopCts = new CancellationTokenSource();
-            var loopToken = _loopCts.Token;
-
-            await EnqueueRequest(loopToken);
-
-            while (!loopToken.IsCancellationRequested)
+            while (!token.IsCancellationRequested)
             {
                 try
                 {
-                    await UniTask.Delay(
-                        TimeSpan.FromSeconds(IntervalSec),
-                        cancellationToken: loopToken
-                    );
+                    await _queue.Enqueue(() => FetchAndDisplayAsync(token));
                 }
-                catch (OperationCanceledException) { break; }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
 
-                if (loopToken.IsCancellationRequested) break;
-                await EnqueueRequest(loopToken);
+                try
+                {
+                    await UniTask.Delay(TimeSpan.FromSeconds(IntervalSec), cancellationToken: token);
+                }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
             }
         }
 
-        private async UniTask EnqueueRequest(CancellationToken loopToken)
-        {
-            _requestCts?.Cancel();
-            _requestCts = CancellationTokenSource.CreateLinkedTokenSource(loopToken);
-            var reqToken = _requestCts.Token;
-
-            await _queue.Enqueue(async () =>
-            {
-                await FetchAndDisplay(reqToken);
-            });
-        }
-
-        private async UniTask FetchAndDisplay(CancellationToken token)
+        private async UniTask FetchAndDisplayAsync(CancellationToken token)
         {
             using var req = UnityWebRequest.Get(ApiUrl);
-            req.timeout = 10;
-            await req.SendWebRequest().WithCancellation(token);
+            var op = req.SendWebRequest();
+            await op.ToUniTask(cancellationToken: token);
 
-            if (token.IsCancellationRequested
-                || req.result is UnityWebRequest.Result.ConnectionError
-                    or UnityWebRequest.Result.ProtocolError)
+            if (req.result != UnityWebRequest.Result.Success)
+            { 
                 return;
-
-            var data = JsonUtility.FromJson<ForecastResponse>(req.downloadHandler.text);
-            var p = data?.properties?.periods?[0];
-            if (p == null) return;
-
-            var label = $"{p.name} - {p.temperature}{p.temperatureUnit}";
-            Sprite icon = null;
-
-            using (var iconReq = UnityWebRequestTexture.GetTexture(p.icon))
-            {
-                await iconReq.SendWebRequest().WithCancellation(token);
-                if (!(token.IsCancellationRequested
-                      || iconReq.result is UnityWebRequest.Result.ConnectionError
-                          or UnityWebRequest.Result.ProtocolError))
-                {
-                    var tex = DownloadHandlerTexture.GetContent(iconReq);
-                    icon = Sprite.Create(
-                        tex,
-                        new Rect(0, 0, tex.width, tex.height),
-                        new Vector2(0.5f, 0.5f)
-                    );
-                }
             }
 
-            if (!token.IsCancellationRequested)
-                _view.SetWeather(label, icon);
+            var p = JsonUtility.FromJson<ForecastResponse>(req.downloadHandler.text)?.properties?.periods?[0];
+            if (p == null)
+            { 
+                return;
+            }
+
+            var label = $"{p.name} – {p.temperature}{p.temperatureUnit}";
+            
+            Sprite icon = null;
+            using var ireq = UnityWebRequestTexture.GetTexture(p.icon);
+            var iop = ireq.SendWebRequest();
+            await iop.ToUniTask(cancellationToken: token);
+
+            if (ireq.result == UnityWebRequest.Result.Success)
+            {
+                var tex = DownloadHandlerTexture.GetContent(ireq);
+                icon = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.one * 0.5f);
+            }
+
+            _view.SetWeather(label, icon);
         }
 
         [Serializable]
-        private class ForecastResponse { public Properties properties; }
+        private class ForecastResponse
+        {
+            public Properties properties;
+        }
+
         [Serializable]
-        private class Properties { public Period[] periods; }
+        private class Properties
+        {
+            public Period[] periods;
+        }
+
         [Serializable]
         private class Period
         {

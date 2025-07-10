@@ -1,3 +1,4 @@
+using MyGame.Scripts.Core;
 using UnityEngine;
 using Zenject;
 
@@ -5,9 +6,8 @@ namespace MyGame.Scripts
 {
     public class ClickerTab : MonoBehaviour, ITab
     {
-        public TabType TabType => TabType.Clicker;
-
         [Inject] private ClickerPresenter _presenter;
+        public TabType TabType => TabType.Clicker;
 
         public void OnShow()
         {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
-namespace MyGame.Scripts
+namespace MyGame.Scripts.Core
 {
     public class RequestQueue
     {
@@ -14,7 +14,11 @@ namespace MyGame.Scripts
         public async UniTask Enqueue(Func<UniTask> request)
         {
             _queue.Enqueue(request);
-            if (!_isRunning) await ProcessQueue();
+            
+            if (!_isRunning)
+            {
+                await ProcessQueue();
+            }
         }
 
         private async UniTask ProcessQueue()
@@ -31,4 +35,3 @@ namespace MyGame.Scripts
         }
     }
 }
-

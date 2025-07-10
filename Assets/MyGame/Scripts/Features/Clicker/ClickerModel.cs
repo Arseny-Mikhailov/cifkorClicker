@@ -4,9 +4,6 @@ namespace MyGame.Scripts
 {
     public class ClickerModel
     {
-        public int Currency { get; private set; }
-        public int Energy { get; private set; }
-
         public readonly ClickerConfig Config;
 
         public ClickerModel(ClickerConfig config)
@@ -15,11 +12,16 @@ namespace MyGame.Scripts
             Energy = config.MaxEnergy;
         }
 
+        public int Currency { get; private set; }
+        public int Energy { get; private set; }
+
         public bool TryClick()
         {
             if (Energy <= 0) return false;
+            
             Energy -= 1;
             Currency += 1;
+            
             return true;
         }
 
