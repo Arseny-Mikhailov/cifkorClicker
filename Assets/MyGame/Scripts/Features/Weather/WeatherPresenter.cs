@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using MyGame.Scripts.UI;
 using UnityEngine;
 using UnityEngine.Networking;
 using Zenject;
@@ -9,7 +10,7 @@ namespace MyGame.Scripts.Features.Weather
 {
     public class WeatherPresenter : IInitializable, IDisposable
     {
-        private readonly IWeatherView _view;
+        private readonly WeatherView _view;
         private readonly RequestQueue _queue;
 
         private CancellationTokenSource _loopCts;
@@ -18,7 +19,7 @@ namespace MyGame.Scripts.Features.Weather
         private const string ApiUrl = "https://api.weather.gov/gridpoints/TOP/32,81/forecast";
         private const float IntervalSec = 5f;
 
-        public WeatherPresenter(IWeatherView view, RequestQueue queue)
+        public WeatherPresenter(WeatherView view, RequestQueue queue)
         {
             _view = view;
             _queue = queue;

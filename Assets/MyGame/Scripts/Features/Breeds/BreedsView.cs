@@ -16,6 +16,11 @@ namespace MyGame.Scripts
         public TMP_Text popupDescription;
         public Button popupButton;
 
+        private void Awake()
+        {
+            popupButton.onClick.AddListener(HidePopup);
+        }
+
         public void ClearList()
         {
             foreach (Transform child in listContainer)

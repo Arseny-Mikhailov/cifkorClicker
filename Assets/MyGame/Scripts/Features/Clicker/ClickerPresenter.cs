@@ -33,11 +33,10 @@ namespace MyGame.Scripts
 
         private void HandleClick()
         {
-            if (_model.TryClick())
-            {
-                _view.PlayClickVFX();
-                UpdateUI();
-            }
+            if (!_model.TryClick()) return;
+            
+            _view.PlayClickVFX();
+            UpdateUI();
         }
 
         private async UniTaskVoid StartAutoClick(CancellationToken token)

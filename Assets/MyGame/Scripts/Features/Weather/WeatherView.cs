@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace MyGame.Scripts.UI
 {
-    public class WeatherView : MonoBehaviour, IWeatherView
+    public class WeatherView : MonoBehaviour
     {
         public event Action Showed;
         public event Action Hidden;
